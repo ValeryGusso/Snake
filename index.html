@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ssssnake</title>
+  </head>
+  <body>
+    <div class="game">
+      <div class="header">
+        <h1 class="hide">Время: <span id="time"></span> | Счёт: <span id="score"></span></h1>
+        <h1 id="choise">Выбери размер поля и скорость чтобы продолжить</h1>
+        <button class="btn" id="btn" disabled>Play →</button>
+        <div class="left-block">Используй <br><span class="keys">W<br>A  D<br>S</span><br>для управления</div>
+        <div class="right-block">Используй <br><br><span class="keys">SPACE</span><br><br>для паузы</div>
+      </div>
+      <div class="container"></div>
+      <div class="foother">
+        <div class="left-menu">
+          <ul id="size" class="isometric-list">
+            <li class="for-size" id="li-title" style="--i: 1; --t: 0px">
+              Размер поля
+            </li>
+            <li class="hide-li for-size" style="--i: 2; --t: -110px">10x10</li>
+            <li class="hide-li for-size" style="--i: 3; --t: -220px">15x15</li>
+            <li class="hide-li for-size" style="--i: 4; --t: -330px">20x20</li>
+            <li class="hide-li for-size" style="--i: 5; --t: -440px">25x25</li>
+            <li class="hide-li for-size" style="--i: 6; --t: -550px">30x30</li>
+            <li class="hide-li for-size" style="--i: 7; --t: -660px">40x40</li>
+          </ul>
+        </div>
+        <div class="right-menu">
+          <ul id="speed" class="isometric-list">
+            <li class="for-speed" id="li-speed" style="--i: 1; --t: 0px">
+              Скорость
+            </li>
+            <li class="hide-li for-speed" style="--i: 2; --t: -110px">x0.5</li>
+            <li class="hide-li for-speed" style="--i: 3; --t: -220px">x1</li>
+            <li class="hide-li for-speed" style="--i: 4; --t: -330px">x2</li>
+            <li class="hide-li for-speed" style="--i: 5; --t: -440px">x3</li>
+            <li class="hide-li for-speed" style="--i: 6; --t: -550px">x4</li>
+            <li class="hide-li for-speed" style="--i: 7; --t: -660px">x5</li>
+          </ul>
+        </div>
+        <div class="checkbox">
+          <p>Borders: </p>
+          <input type="checkbox" name="border-check" id="border-check">
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
