@@ -14,6 +14,7 @@ const $leftBlock = document.querySelector('.left-block')
 const $rightBlock = document.querySelector('.right-block')
 const $borderCheck = document.querySelector('#border-check')
 const $checkbox = document.querySelector('.checkbox')
+const $wasted = document.querySelector('#wasted')
 const getRandom = (min, max) => Math.ceil(Math.random() * (max - min) + min)
 
 let boxSize
@@ -37,6 +38,7 @@ let stop = false
 let border = false
 let step = false
 let transfer = false
+let deg
 
 const move = (event) => {
   if (
@@ -50,6 +52,7 @@ const move = (event) => {
     left = false
     stop = false
     blockStep(1)
+    deg = 180
   } else if (
     (event.key.toLowerCase() === 'd' || event.key === 'в') &&
     !left &&
@@ -61,6 +64,7 @@ const move = (event) => {
     left = false
     stop = false
     blockStep(1)
+    deg = 270
   } else if (
     (event.key.toLowerCase() === 's' || event.key === 'ы') &&
     !up &&
@@ -72,6 +76,7 @@ const move = (event) => {
     left = false
     stop = false
     blockStep(1)
+    deg = 0
   } else if (
     (event.key.toLowerCase() === 'a' || event.key === 'ф') &&
     !right &&
@@ -83,6 +88,7 @@ const move = (event) => {
     left = true
     stop = false
     blockStep(1)
+    deg = 90
   } else if (event.key === ' ') {
     stop = true
   }
@@ -107,16 +113,16 @@ const endGame = () => {
   $liSpeed[0].classList.remove('hide-li')
   $leftBlock.classList.remove('hide')
   $rightBlock.classList.remove('hide')
+  $wasted.classList.add('show-wasted')
+  $wasted.classList.remove('hide-wasted')
   $container.removeChild($boxs[$boxs.length - 1])
 }
 
 const createApple = () => {
+  do {
   appleX = getRandom(0, dimension) * boxSize
   appleY = getRandom(0, dimension) * boxSize
-  if (xCheck.includes(appleX) && yCheck.includes(appleY)) {
-    appleX = getRandom(0, dimension) * boxSize
-    appleY = getRandom(0, dimension) * boxSize
-  }
+  } while (xCheck.includes(appleX) && yCheck.includes(appleY))
   let apple = document.createElement('div')
   apple.classList.add('apple')
   apple.style.top = `${appleY}px`
@@ -224,8 +230,8 @@ const startGame = (event) => {
   left = false
   xCheck = []
   yCheck = []
-  x = getRandom(0, dimension) * boxSize
-  y = getRandom(0, dimension) * boxSize
+  x = 240
+  y = 240
   $liSize[0].classList.add('hide-li')
   $liSpeed[0].classList.add('hide-li')
   $leftBlock.classList.add('hide')
@@ -236,8 +242,16 @@ const startGame = (event) => {
   $btn.style.filter = 'opacity(0)'
   $btn.setAttribute('disabled', 'disabled')
   $borderCheck.setAttribute('disabled', 'disabled')
+  $wasted.classList.add('hide-wasted')
+  $wasted.classList.remove('show-wasted')
 
   const trail = setInterval(() => {
+    // if ($boxs.length > 2) {
+    // $boxs[$boxs.length -1].innerHTML = '<img src="head2.webp" alt="head">'
+    // $boxs[$boxs.length -1].style.background = ''
+    // $boxs[$boxs.length -2].innerHTML = ''
+    // }
+    // console.log($boxs[length -1])
     if ((up || right || down || left) && scale && !stop && $boxs[0]) {
       $container.removeChild($boxs[0])
       xCheck.pop()
@@ -287,6 +301,7 @@ const startGame = (event) => {
       y = getRandom(0, dimension) * boxSize
     }
     let box = document.createElement('div')
+    box.style = `--d: ${deg}deg;`
     box.classList.add('box')
     box.style.top = `${y}px`
     box.style.left = `${x}px`
@@ -312,9 +327,9 @@ const startGame = (event) => {
     } else if (x >= 600 - boxSize && right && !border) {
       x -= 600
     } else if (y >= 600 - boxSize && down && !border) {
-      y-= 600
+      y -= 600
     }
-    
+
     for (let i = 1; i < xCheck.length; i++) {
       if (xCheck[i] === x && yCheck[i] === y && xCheck.length > 1) {
         endGame()
@@ -339,7 +354,7 @@ const startGame = (event) => {
 }
 
 const setBorder = (event) => {
-  border ? border = false: border = true
+  border ? (border = false) : (border = true)
 }
 
 document.addEventListener('keypress', move)

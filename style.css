@@ -142,13 +142,17 @@ body {
 
 .box {
   position: absolute;
-  background: black;
-  /* background: url(skin.jpg); */
-  /* background: url(skin2.jpg);
-  background-size: cover; */
-  /* border-radius: 5px; */
+  background: #76b868;
+  background-size: cover;
   width: 15px;
   height: 15px;
+}
+
+.box:last-child {
+  background: url(head.webp);
+  background-size: cover;
+  transform: scale(3)
+  rotateZ(var(--d));
 }
 
 .apple {
@@ -182,7 +186,7 @@ body {
   display: flex;
   font-size: 32px;
   align-items: center;
-  top: -20px
+  top: 680px
 }
 
 .checkbox input {
@@ -190,6 +194,30 @@ body {
   height: 25px;
   cursor: pointer;
   margin-top: 8px;
+}
+
+.wasted {
+  width: 100%;
+  height: 600px;
+  position: absolute;
+  top: -450px;
+  transform: scale(0); 
+  transition: 5s;
+}
+
+.wasted img {
+  width: 100%;
+  height: 100%;
+}
+
+.show-wasted {
+  transform: scale(1);
+  filter: opacity(1);
+}
+
+.hide-wasted {
+  filter: opacity(0);
+  transition: 0s!important;
 }
 
 /* Меню выбора */
